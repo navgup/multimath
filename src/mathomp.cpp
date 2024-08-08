@@ -324,12 +324,7 @@ int rem_pio2(double *x, double *y, int e0, int nx, int prec, const int32_t *ipio
             j |= iq[i];
         if (j == 0)      /* need recomputation */
         {
-            /* On s390x gcc 6.1 -O3 produces the warning "array subscript is below
-               array bounds [-Werror=array-bounds]".  Only __ieee754_rem_pio2l
-               calls __kernel_rem_pio2 for normal numbers and |x| > pi/4 in case
-               of ldbl-96 and |x| > 3pi/4 in case of ldbl-128[ibm].
-               Thus x can't be zero and ipio2 is not zero, too.  Thus not all iq[]
-               values can't be zero.  */
+            
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Warray-bounds"
             for (k = 1; iq[jk - k] == 0; k++)
